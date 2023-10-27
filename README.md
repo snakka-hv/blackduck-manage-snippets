@@ -36,7 +36,7 @@ Update the token.txt file with a Black Duck API token. (https://community.synops
 
 The `sunakka/blackduck-manage-snippets` image can be invoked as follows:
 
-usage: docker run -it --rm --network host -e base_url=https://your.blackduck.url -e project_name=[project_name] -e project_version=[project_version] -v ./token.txt:/usr/src/app/token.txt sunakka/blackduck-manage-snippets:latest
+usage: `docker run -it --rm --network host -e base_url=https://your.blackduck.url -e project_name=[project_name] -e project_version=[project_version] -v ./token.txt:/usr/src/app/token.txt sunakka/blackduck-manage-snippets:latest`
 
 # EXAMPLE EXECUTION
 
@@ -44,7 +44,7 @@ The example project/version (partisan-snippets/1.0) contains 4 unignored/unconfi
 
 Running the script specifying just the project and version name will cause all snippets to be ignored:
 
-docker run -it --rm --network host -e base_url=https://your.blackduck.url -e project_name=partisan-snippets -e project_version=1.0 -v ./token.txt:/usr/src/app/token.txt sunakka/blackduck-manage-snippets:latest
+`docker run -it --rm --network host -e base_url=https://your.blackduck.url -e project_name=partisan-snippets -e project_version=1.0 -v ./token.txt:/usr/src/app/token.txt sunakka/blackduck-manage-snippets:latest`
 
 File: myfile.erl - Ignored
 File: partisan_acknowledgement_backend.erl - Ignored
