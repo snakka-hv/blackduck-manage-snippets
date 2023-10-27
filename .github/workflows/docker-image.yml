@@ -22,8 +22,7 @@ jobs:
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
     - name: Build the Docker image
       run: |
-        docker build . --file Dockerfile --tag sunakka/blackduck-manage-snippets:$(date +%s) 
-        docker tag sunakka/blackduck-manage-snippets:$(date +%s) sunakka/blackduck-manage-snippets:latest
+        docker build . --file Dockerfile --tag sunakka/blackduck-manage-snippets:latest
         
     - name: Docker Push
       run: docker push sunakka/blackduck-manage-snippets
