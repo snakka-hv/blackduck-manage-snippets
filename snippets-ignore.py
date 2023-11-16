@@ -31,14 +31,14 @@ def send_bulk_update_request(project_id, version_id, snippet_updates):
         exit()
 
     # if response.status_code == 412:
-    #     # print(snippet_updates)
+    #     print(snippet_updates)
     #     # time.sleep(2)
     #     # response = bd.session.put(url, json=snippet_updates, headers=headers)
     #     print(response.status_code)
-    #     # exit()
+    #     exit()
     # else:
     #     print(snippet_updates)
-    #     exit()
+    #     # exit()
 
     return response
 
@@ -47,24 +47,24 @@ def create_snippet_update_body(snippet_bom_entry, match, ignore):
     # print(snippet_bom_entry)
     # print(snippet_bom_entry['fileSnippetBomComponents'][0]['ignored'])
     return {
-"scanSummary": f"{bd.base_url}/api/scan-summaries/{snippet_bom_entry['scanId']}",
-"uri": snippet_bom_entry['uri'],
-"compositePath": {
-"path": snippet_bom_entry['compositePath']['path'],
-"archiveContext": snippet_bom_entry['compositePath']['archiveContext'],
-"fileName": snippet_bom_entry['compositePath']['fileName'],
-"compositePathContext": snippet_bom_entry['compositePath']['compositePathContext']
-},
-"snippetBomComponentRequests": [{
-"sourceStartLines": match['matchStartLines'],
-"sourceEndLines": match['matchEndLines'],
-"hashId": match['hashId'],
-"component": f"{bd.base_url}/api/components/{match['project']['id']}",
-"componentVersion": f"{bd.base_url}/api/components/{match['project']['id']}/versions/{match['release']['id']}",
-"origin": f"{bd.base_url}/api/components/{match['project']['id']}/versions/{match['release']['id']}/origins/{match['channelRelease']['id']}",
-"reviewStatus": match['reviewStatus'],
-"ignored": ignore
-}]
+        "scanSummary": f"{bd.base_url}/api/scan-summaries/{snippet_bom_entry['scanId']}",
+        "uri": snippet_bom_entry['uri'],
+        "compositePath": {
+        "path": snippet_bom_entry['compositePath']['path'],
+        "archiveContext": snippet_bom_entry['compositePath']['archiveContext'],
+        "fileName": snippet_bom_entry['compositePath']['fileName'],
+        "compositePathContext": snippet_bom_entry['compositePath']['compositePathContext']
+        },
+        "snippetBomComponentRequests": [{
+        "sourceStartLines": match['sourceStartLines'],
+        "sourceEndLines": match['sourceEndLines'],
+        "hashId": match['hashId'],
+        "component": f"{bd.base_url}/api/components/{match['project']['id']}",
+        "componentVersion": f"{bd.base_url}/api/components/{match['project']['id']}/versions/{match['release']['id']}",
+        "origin": f"{bd.base_url}/api/components/{match['project']['id']}/versions/{match['release']['id']}/origins/{match['channelRelease']['id']}",
+        "reviewStatus": match['reviewStatus'],
+        "ignored": ignore
+        }]
 }
 
 
@@ -147,8 +147,8 @@ for snippet_item in snippet_bom_entries:
         elif args.report:
             print(f"File: {snippet_item['name']} (size = {snippet_item['size']})")
             print(f"    Block {block_num}: matchScore = {int(match['matchScore'] * 100)}%, matchCoverage = {match['matchCoverage']}%, matchedLines = {matched_lines} - Would NOT be ignored")
-        if not args.report and len(snippetUpdates) >= 50:
-            print("Send request to ignore 50 snippets.")
+        if not args.report and len(snippetUpdates) >= 100:
+            print("Send request to ignore 100 snippets.")
             send_bulk_update_request(project_id, version_id, snippetUpdates)
             snippetUpdates.clear()
         block_num += 1
